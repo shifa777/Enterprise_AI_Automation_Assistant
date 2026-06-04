@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Enterprise AI Automation Assistant</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-brand d-flex align-items-center gap-3">
+    <div class="brand-icon"><i class="bi bi-cpu-fill text-white"></i></div>
+    <div>
+      <div class="brand-title">Enterprise AI</div>
+      <div class="brand-sub">Automation Assistant</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="/" class="nav-link">
+      <i class="bi bi-chat-dots-fill"></i> AI Assistant
+    </a>
+    <a href="/dashboard" class="nav-link active">
+      <i class="bi bi-grid-1x2-fill"></i> Dashboard
+    </a>
+
+    <div class="nav-section-label">Analytics</div>
+    <a href="#statsSection" class="nav-link">
+      <i class="bi bi-bar-chart-fill"></i> Statistics
+    </a>
+    <a href="#historySection" class="nav-link">
+      <i class="bi bi-clock-history"></i> Workflow History
+    </a>
+    <a href="#timelineSection" class="nav-link">
+      <i class="bi bi-activity"></i> Activity Log
+    </a>
+    <a href="#howItWorksSection" class="nav-link">
+      <i class="bi bi-diagram-3-fill"></i> How It Works
+    </a>
+    <a href="#futureSection" class="nav-link">
+      <i class="bi bi-stars"></i> Future Features
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="d-flex align-items-center gap-2">
+      <span class="status-dot"></span>
+      <span style="font-size:12px;color:var(--text-muted)">Gemini AI Connected</span>
+    </div>
+    <div style="font-size:10px;color:rgba(148,163,184,0.4);margin-top:4px">gemini-2.5-flash · Active</div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="main-content">
+
+  <!-- Top Navbar -->
+  <div class="top-navbar">
+    <div>
+      <div class="page-title"><i class="bi bi-grid-1x2-fill me-2" style="color:#a5b4fc"></i>Automation Intelligence Dashboard</div>
+      <div class="page-subtitle">Real-time monitoring of all AI-powered workflow automation operations</div>
+    </div>
+    <div class="navbar-actions">
+      <span class="badge-ai"><i class="bi bi-activity me-1"></i>Live Data</span>
+      <a href="/" class="btn btn-sm" style="background:rgba(79,70,229,0.15);color:#a5b4fc;border:1px solid rgba(79,70,229,0.3);border-radius:8px;font-size:13px;padding:6px 14px">
+        <i class="bi bi-plus-lg me-1"></i>New Workflow
+      </a>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header mb-4" id="statsSection">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:8px">
+            <i class="bi bi-bar-chart me-1"></i> Operations Intelligence Center
+          </div>
+          <h2 style="font-size:26px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.2">
+            Enterprise Automation<br>
+            <span style="background:linear-gradient(90deg,#67e8f9,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+              Intelligence Dashboard
+            </span>
+          </h2>
+          <p style="font-size:14px;color:rgba(226,232,240,0.7);margin:0">
+            Monitor all AI workflow automations, task assignments, communication drafts, and automation triggers in real time.
+          </p>
+        </div>
+        <div class="col-md-4 text-end d-none d-md-block">
+          <div style="font-size:64px;opacity:0.12"><i class="bi bi-bar-chart-line-fill"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Cards Row -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="stat-card purple h-100">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="stat-icon purple"><i class="bi bi-diagram-3-fill"></i></div>
+            <span style="font-size:10px;color:#a5b4fc;font-weight:600;background:rgba(79,70,229,0.15);padding:3px 8px;border-radius:10px">TOTAL</span>
+          </div>
+          <div class="stat-value">{{ stats.total_workflows }}</div>
+          <div class="stat-label mt-1">Workflows Executed</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card green h-100">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="stat-icon green"><i class="bi bi-list-task"></i></div>
+            <span style="font-size:10px;color:#6ee7b7;font-weight:600;background:rgba(16,185,129,0.15);padding:3px 8px;border-radius:10px">TOTAL</span>
+          </div>
+          <div class="stat-value">{{ stats.total_tasks }}</div>
+          <div class="stat-label mt-1">Tasks Recommended</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card cyan h-100">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="stat-icon cyan"><i class="bi bi-envelope-fill"></i></div>
+            <span style="font-size:10px;color:#67e8f9;font-weight:600;background:rgba(6,182,212,0.15);padding:3px 8px;border-radius:10px">TOTAL</span>
+          </div>
+          <div class="stat-value">{{ stats.total_emails }}</div>
+          <div class="stat-label mt-1">Comms Drafted</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card amber h-100">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="stat-icon amber"><i class="bi bi-send-fill"></i></div>
+            <span style="font-size:10px;color:#fcd34d;font-weight:600;background:rgba(245,158,11,0.15);padding:3px 8px;border-radius:10px">TOTAL</span>
+          </div>
+          <div class="stat-value">{{ stats.total_automations }}</div>
+          <div class="stat-label mt-1">Automations Triggered</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-column row: history + timeline -->
+    <div class="row g-4 mb-4">
+
+      <!-- Workflow History Table -->
+      <div class="col-lg-7" id="historySection">
+        <div class="panel h-100">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="bi bi-clock-history"></i> Workflow Execution History
+            </div>
+            <span style="font-size:11px;color:var(--text-muted)">{{ workflows|length }} total</span>
+          </div>
+          <div style="overflow-x:auto">
+            {% if workflows %}
+            <table class="workflow-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Workflow Request</th>
+                  <th>Status</th>
+                  <th>Tasks</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for wf in workflows %}
+                <tr>
+                  <td>
+                    <span style="background:rgba(79,70,229,0.15);color:#a5b4fc;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700">#{{ wf.id }}</span>
+                  </td>
+                  <td>
+                    <div style="font-size:13px;font-weight:600;color:var(--text-light);margin-bottom:3px">
+                      {{ wf.user_input[:55] }}{% if wf.user_input|length > 55 %}...{% endif %}
+                    </div>
+                    <div style="font-size:11px;color:var(--text-muted)">
+                      <i class="bi bi-file-earmark-bar-graph me-1"></i>Summary generated
+                      &nbsp;·&nbsp;
+                      <i class="bi bi-envelope me-1"></i>Draft ready
+                    </div>
+                  </td>
+                  <td>
+                    <span style="background:rgba(16,185,129,0.15);color:#6ee7b7;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;border:1px solid rgba(16,185,129,0.25)">
+                      <i class="bi bi-check-circle me-1"></i>Completed
+                    </span>
+                  </td>
+                  <td>
+                    <span style="background:rgba(79,70,229,0.12);color:#a5b4fc;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:600">
+                      {{ wf.tasks|length }} tasks
+                    </span>
+                  </td>
+                  <td style="font-size:12px;color:var(--text-muted);white-space:nowrap">
+                    <i class="bi bi-clock me-1"></i>{{ wf.timestamp }}
+                  </td>
+                </tr>
+                <!-- Expanded detail row -->
+                <tr>
+                  <td colspan="5" style="padding:0 14px 16px">
+                    <div style="background:rgba(79,70,229,0.06);border:1px solid rgba(79,70,229,0.12);border-radius:8px;padding:12px 14px;font-size:12.5px;color:var(--text-muted);line-height:1.75;white-space:pre-line">
+                      {{ wf.summary[:360] if wf.summary else 'No summary available.' }}{% if wf.summary and wf.summary|length > 360 %}...{% endif %}
+                    </div>
+                    {% if wf.tasks %}
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                      {% for task in wf.tasks[:5] %}
+                      <span style="font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600;
+                        {% if task.priority == 'High' %}background:rgba(239,68,68,0.12);color:#fca5a5;border:1px solid rgba(239,68,68,0.2);
+                        {% elif task.priority == 'Medium' %}background:rgba(245,158,11,0.12);color:#fcd34d;border:1px solid rgba(245,158,11,0.2);
+                        {% else %}background:rgba(16,185,129,0.12);color:#6ee7b7;border:1px solid rgba(16,185,129,0.2);{% endif %}">
+                        {{ task.title }}
+                        {% if task.department %}
+                        <span style="opacity:0.6;margin-left:4px">· {{ task.department }}</span>
+                        {% endif %}
+                      </span>
+                      {% endfor %}
+                    </div>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <div class="empty-state">
+              <i class="bi bi-inbox d-block"></i>
+              <p>No workflows yet. <a href="/" style="color:#a5b4fc">Run your first automation</a> to see it here.</p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Timeline -->
+      <div class="col-lg-5" id="timelineSection">
+        <div class="panel h-100">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="bi bi-activity"></i> Automation Activity Log
+            </div>
+            <span style="font-size:11px;color:var(--text-muted)">{{ stats.total_activities }} events</span>
+          </div>
+          <div class="panel-body" style="max-height:600px;overflow-y:auto">
+            {% if stats.recent_logs %}
+            <div class="timeline">
+              {% for log in stats.recent_logs %}
+              {% if 'Workflow' in log.activity_type %}{% set tclass = 'workflow' %}
+              {% elif 'Analysis' in log.activity_type or 'Summary' in log.activity_type %}{% set tclass = 'summary' %}
+              {% elif 'Task' in log.activity_type %}{% set tclass = 'tasks' %}
+              {% elif 'Communication' in log.activity_type or 'Email' in log.activity_type %}{% set tclass = 'email' %}
+              {% else %}{% set tclass = 'workflow' %}{% endif %}
+              <div class="timeline-item {{ tclass }}">
+                <div class="timeline-type">
+                  {% if 'Workflow' in log.activity_type %}<i class="bi bi-diagram-3 me-1"></i>
+                  {% elif 'Analysis' in log.activity_type %}<i class="bi bi-cpu me-1"></i>
+                  {% elif 'Task' in log.activity_type %}<i class="bi bi-list-task me-1"></i>
+                  {% elif 'Communication' in log.activity_type %}<i class="bi bi-envelope me-1"></i>
+                  {% elif 'Automation' in log.activity_type %}<i class="bi bi-send-fill me-1"></i>
+                  {% else %}<i class="bi bi-circle me-1"></i>{% endif %}
+                  {{ log.activity_type }}
+                </div>
+                <div class="timeline-desc">{{ log.description }}</div>
+                <div class="timeline-time"><i class="bi bi-clock me-1"></i>{{ log.timestamp }}</div>
+              </div>
+              {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+              <i class="bi bi-clock-history d-block"></i>
+              <p>No activity yet. Run a workflow to populate the log.</p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /row -->
+
+    <!-- Recent Communication Drafts -->
+    {% if workflows %}
+    <div class="mb-4">
+      <div class="panel-title mb-3" style="font-size:14px;font-weight:700;color:var(--text-light)">
+        <i class="bi bi-envelope-fill" style="color:#67e8f9;margin-right:8px"></i>Recent AI Communication Drafts
+      </div>
+      <div class="row g-3">
+        {% for wf in workflows[:3] %}
+        <div class="col-md-4">
+          <div class="panel h-100">
+            <div class="panel-header" style="padding:14px 16px">
+              <div style="font-size:12px;font-weight:700;color:var(--text-light)">
+                <i class="bi bi-diagram-3 me-1" style="color:#a5b4fc"></i>Workflow #{{ wf.id }}
+              </div>
+              <span style="font-size:10px;color:var(--text-muted)">{{ wf.timestamp[:10] }}</span>
+            </div>
+            <div class="panel-body" style="padding:14px 16px">
+              <div style="font-size:11.5px;color:var(--text-muted);line-height:1.75;max-height:130px;overflow:hidden;font-family:'Courier New',monospace">
+                {{ wf.email[:280] if wf.email else 'No communication draft generated.' }}{% if wf.email and wf.email|length > 280 %}...{% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- How AI Automation Works -->
+    <div class="panel mb-4" id="howItWorksSection">
+      <div class="panel-header">
+        <div class="panel-title">
+          <i class="bi bi-diagram-3-fill"></i> How AI Automation Works
+        </div>
+        <span style="font-size:11px;padding:3px 10px;background:rgba(79,70,229,0.15);color:#a5b4fc;border-radius:20px;font-weight:600">Pipeline Overview</span>
+      </div>
+      <div class="panel-body">
+        <div class="row g-3">
+          <div class="col-md-2 col-6">
+            <div class="how-step">
+              <div class="how-step-num" style="background:rgba(79,70,229,0.2);color:#a5b4fc">1</div>
+              <div class="how-step-icon" style="color:#a5b4fc"><i class="bi bi-keyboard-fill"></i></div>
+              <div class="how-step-title">User Input</div>
+              <div class="how-step-desc">Workflow request entered via the AI assistant interface</div>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="how-step">
+              <div class="how-step-num" style="background:rgba(124,58,237,0.2);color:#c4b5fd">2</div>
+              <div class="how-step-icon" style="color:#c4b5fd"><i class="bi bi-cpu-fill"></i></div>
+              <div class="how-step-title">Gemini Analysis</div>
+              <div class="how-step-desc">Gemini 2.5 Flash processes and analyses the workflow context</div>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="how-step">
+              <div class="how-step-num" style="background:rgba(6,182,212,0.2);color:#67e8f9">3</div>
+              <div class="how-step-icon" style="color:#67e8f9"><i class="bi bi-file-earmark-bar-graph-fill"></i></div>
+              <div class="how-step-title">Workflow Summary</div>
+              <div class="how-step-desc">AI generates a structured workflow analysis summary</div>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="how-step">
+              <div class="how-step-num" style="background:rgba(16,185,129,0.2);color:#6ee7b7">4</div>
+              <div class="how-step-icon" style="color:#6ee7b7"><i class="bi bi-list-task"></i></div>
+              <div class="how-step-title">Task Suggestions</div>
+              <div class="how-step-desc">Recommended tasks with priorities and department assignments</div>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="how-step">
+              <div class="how-step-num" style="background:rgba(245,158,11,0.2);color:#fcd34d">5</div>
+              <div class="how-step-icon" style="color:#fcd34d"><i class="bi bi-envelope-fill"></i></div>
+              <div class="how-step-title">Email Draft</div>
+              <div class="how-step-desc">Professional communication draft generated by the AI pipeline</div>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="how-step">
+              <div class="how-step-num" style="background:rgba(236,72,153,0.2);color:#f9a8d4">6</div>
+              <div class="how-step-icon" style="color:#f9a8d4"><i class="bi bi-send-fill"></i></div>
+              <div class="how-step-title">Automation Trigger</div>
+              <div class="how-step-desc">Email automation triggered via n8n webhook integration</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Future-Ready Features -->
+    <div id="futureSection">
+      <div class="panel-title mb-3" style="font-size:14px;font-weight:700;color:var(--text-light)">
+        <i class="bi bi-stars" style="color:#fcd34d;margin-right:8px"></i>Future-Ready Features
+        <span style="font-size:11px;font-weight:500;color:var(--text-muted);margin-left:8px">(Planned scope — coming soon)</span>
+      </div>
+      <div class="row g-3">
+
+        <div class="col-md-3 col-6">
+          <div class="future-card">
+            <div class="future-icon" style="color:#a5b4fc;background:rgba(79,70,229,0.15)">
+              <i class="bi bi-file-earmark-pdf-fill"></i>
+            </div>
+            <div class="future-title">PDF Upload</div>
+            <div class="future-desc">Upload and process PDF documents, contracts, and reports through the AI automation pipeline.</div>
+            <div class="future-badge">Planned</div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+          <div class="future-card">
+            <div class="future-icon" style="color:#67e8f9;background:rgba(6,182,212,0.15)">
+              <i class="bi bi-image-fill"></i>
+            </div>
+            <div class="future-title">OCR / Image Processing</div>
+            <div class="future-desc">Extract text and data from images, scanned documents, and whiteboard photos using OCR technology.</div>
+            <div class="future-badge">Planned</div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+          <div class="future-card">
+            <div class="future-icon" style="color:#6ee7b7;background:rgba(16,185,129,0.15)">
+              <i class="bi bi-camera-video-fill"></i>
+            </div>
+            <div class="future-title">Live Meeting Integration</div>
+            <div class="future-desc">Real-time meeting transcription and instant AI-powered workflow generation from live video calls.</div>
+            <div class="future-badge">Planned</div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+          <div class="future-card">
+            <div class="future-icon" style="color:#fcd34d;background:rgba(245,158,11,0.15)">
+              <i class="bi bi-chat-square-dots-fill"></i>
+            </div>
+            <div class="future-title">Slack / Teams Notifications</div>
+            <div class="future-desc">Push workflow summaries, tasks, and automation alerts directly to Slack channels or Microsoft Teams.</div>
+            <div class="future-badge">Planned</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /page-content -->
+</div><!-- /main-content -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
